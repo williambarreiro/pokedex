@@ -8,18 +8,20 @@ environment:
 
 dependencies:
   bloc: ^8.1.1
+  dio: ^5.1.1
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
   flutter_dotenv: ^5.0.2
   flutter_modular: ^5.0.3
-  http: ^0.13.6
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  faker: ^2.1.0
+  mocktail: ^0.3.0
 
 flutter:
   uses-material-design: true

@@ -8,5 +8,4 @@ abstract class PokemonRepository {
     required int offset,
   });
   Future<GetPokemonResponseModel> getPokemon(int id);
-  Future<String> getPokemonSprite(int id);
 }

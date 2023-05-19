@@ -3,7 +3,7 @@ import 'package:pokedex/app/models/pokemon_basic_model.dart';
 import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/repositories/pokemon/pokemon_repository.dart';
 
-import '../../models/get_pokemons_response_model.dart';
+import '../../core/helpers/environments.dart';
 import 'pokemon_service.dart';
 
 class PokemonServiceImpl implements PokemonService {
@@ -13,22 +13,23 @@ class PokemonServiceImpl implements PokemonService {
 
   @override
   Future<List<PokemonBasicModel>> getPokemons({required int offset}) async {
+    final spritesUrl = Environments.param(Constants.envSpritesUrlKey) ?? '';
+    final pokemonBasicList = <PokemonBasicModel>[];
+
     final response = await _repository.getPokemons(
       limit: Constants.appPaginationLimit,
       offset: offset,
     );
 
     final pokemons = response.results;
-    final pokemonBasicList = <PokemonBasicModel>[];
-    final sprites = await _getPokemonsSprites(pokemons);
 
-    for (int i = 0; i < pokemons.length; i++) {
-      final pokemon = pokemons[i];
+    for (final pokemon in pokemons) {
+      final id = _getIdFromUrl(pokemon.url);
       pokemonBasicList.add(
         PokemonBasicModel(
           id: _getIdFromUrl(pokemon.url),
           name: pokemon.name,
-          sprite: sprites[i],
+          sprite: '$spritesUrl/$id.png',
         ),
       );
     }
@@ -51,22 +52,6 @@ class PokemonServiceImpl implements PokemonService {
       types: types,
       stats: stats,
     );
-  }
-
-  Future<List<String>> _getPokemonsSprites(List<Result> pokemons) async {
-    final futureCalls = <Future<String>>[];
-
-    for (final pokemon in pokemons) {
-      final id = _getIdFromUrl(pokemon.url);
-      /* 
-        Rota '/pokemon-form' usada apenas para pegar a sprite.
-        Como o conteúdo retornado pela rota '/pokemon' é muito extenso, usá-la
-        apenas para pegar a sprite seria muito custoso.
-      */
-      futureCalls.add(_repository.getPokemonSprite(id));
-    }
-
-    return await Future.wait(futureCalls);
   }
 
   int _getIdFromUrl(String url) {

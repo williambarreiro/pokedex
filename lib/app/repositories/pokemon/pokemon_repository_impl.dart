@@ -26,10 +26,4 @@ class PokemonRepositoryImpl implements PokemonRepository {
     final result = await _restClient.get('/pokemon/$id');
     return GetPokemonResponseModel.fromMap(result);
   }
-
-  @override
-  Future<String> getPokemonSprite(int id) async {
-    final result = await _restClient.get('/pokemon-form/$id');
-    return result['sprites']?['front_default'] ?? '';
-  }
 }

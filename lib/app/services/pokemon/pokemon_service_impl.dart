@@ -3,6 +3,7 @@ import 'package:pokedex/app/models/pokemon_basic_model.dart';
 import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/repositories/pokemon/pokemon_repository.dart';
 
+import '../../models/get_pokemons_response_model.dart';
 import 'pokemon_service.dart';
 
 class PokemonServiceImpl implements PokemonService {
@@ -19,20 +20,18 @@ class PokemonServiceImpl implements PokemonService {
 
     final pokemons = response.results;
     final pokemonBasicList = <PokemonBasicModel>[];
+    final sprites = await _getPokemonsSprites(pokemons);
 
-    for (final pokemon in pokemons) {
-      final id = _getIdFromUrl(pokemon.url);
-      /* 
-        Rota '/pokemon-form' usada apenas para pegar a sprite.
-        Como o conteúdo retornado pela rota '/pokemon' é muito extenso, usá-la
-        apenas para pegar a sprite seria muito custoso.
-      */
-      final sprite = await _repository.getPokemonSprite(id);
+    for (int i = 0; i < pokemons.length; i++) {
+      final pokemon = pokemons[i];
       pokemonBasicList.add(
-        PokemonBasicModel(id: id, name: pokemon.name, sprite: sprite),
+        PokemonBasicModel(
+          id: _getIdFromUrl(pokemon.url),
+          name: pokemon.name,
+          sprite: sprites[i],
+        ),
       );
     }
-
     return pokemonBasicList;
   }
 
@@ -52,6 +51,22 @@ class PokemonServiceImpl implements PokemonService {
       types: types,
       stats: stats,
     );
+  }
+
+  Future<List<String>> _getPokemonsSprites(List<Result> pokemons) async {
+    final futureCalls = <Future<String>>[];
+
+    for (final pokemon in pokemons) {
+      final id = _getIdFromUrl(pokemon.url);
+      /* 
+        Rota '/pokemon-form' usada apenas para pegar a sprite.
+        Como o conteúdo retornado pela rota '/pokemon' é muito extenso, usá-la
+        apenas para pegar a sprite seria muito custoso.
+      */
+      futureCalls.add(_repository.getPokemonSprite(id));
+    }
+
+    return await Future.wait(futureCalls);
   }
 
   int _getIdFromUrl(String url) {

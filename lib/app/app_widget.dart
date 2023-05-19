@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'core/ui/ui_config.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
@@ -8,11 +12,20 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Modular.setInitialRoute('/pokemon/list');
 
-    return MaterialApp.router(
-      title: 'Pokédex',
-      routeInformationParser: Modular.routeInformationParser,
-      routerDelegate: Modular.routerDelegate,
-      debugShowCheckedModeBanner: false,
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    return ScreenUtilInit(
+      designSize: const Size(360, 640),
+      builder: (context, child) => MaterialApp.router(
+        title: 'Pokédex',
+        theme: UiConfig.theme,
+        routeInformationParser: Modular.routeInformationParser,
+        routerDelegate: Modular.routerDelegate,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

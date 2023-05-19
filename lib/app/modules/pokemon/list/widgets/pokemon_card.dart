@@ -52,6 +52,7 @@ class PokemonCard extends StatelessWidget {
 
     return SizedBox(
       width: double.infinity,
+      height: 108.h,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,15 +72,19 @@ class PokemonCard extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 64.h,
             width: 64.w,
-            child: Image.network(pokemon.sprite),
+            child: pokemon.sprite.isNotEmpty
+                ? Image.network(
+                    pokemon.sprite,
+                    fit: BoxFit.contain,
+                  )
+                : Container(),
           ),
           Text(
             pokemon.name,
             style: TextStyle(fontSize: 12.sp),
           ),
-          SizedBox(height: 6.h),
+          SizedBox(height: 4.h),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokedex/app/core/ui/pokedex_colors.dart';
 import 'package:pokedex/app/core/ui/screen_size_extension.dart';
 import 'package:pokedex/app/modules/pokemon/list/controller/pokemon_list_controller.dart';
@@ -88,7 +89,13 @@ class _PokemonListPageState extends State<PokemonListPage> {
                   crossAxisCount: 3,
                   children: List.generate(state.pokemons.length, (index) {
                     final pokemon = state.pokemons[index];
-                    return PokemonCard(pokemon: pokemon);
+                    return PokemonCard(
+                      pokemon: pokemon,
+                      onTap: () => Modular.to.pushNamed(
+                        '/pokemon/details',
+                        arguments: pokemon.id,
+                      ),
+                    );
                   }),
                 ),
                 Visibility(

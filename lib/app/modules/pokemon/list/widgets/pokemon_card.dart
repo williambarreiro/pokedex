@@ -5,8 +5,13 @@ import '../../../../models/pokemon_basic_model.dart';
 
 class PokemonCard extends StatelessWidget {
   final PokemonBasicModel pokemon;
+  final void Function()? onTap;
 
-  const PokemonCard({super.key, required this.pokemon});
+  const PokemonCard({
+    super.key,
+    required this.pokemon,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class PokemonCard extends StatelessWidget {
       height: 108.h,
       width: 104.w,
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         child: Stack(
           children: [
             Positioned(child: _buildBackground()),

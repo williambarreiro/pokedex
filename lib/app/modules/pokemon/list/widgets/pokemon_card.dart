@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/app/core/helpers/string_utils.dart';
 import 'package:pokedex/app/core/ui/extensions/screen_size_extension.dart';
 
 import '../../../../models/pokemon_basic_model.dart';
@@ -53,8 +54,6 @@ class PokemonCard extends StatelessWidget {
   }
 
   Widget _buildUpperLayer() {
-    final formattedId = '#${pokemon.id.toString().padLeft(3, '0')}';
-
     return SizedBox(
       width: double.infinity,
       height: 108.h,
@@ -67,7 +66,7 @@ class PokemonCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                formattedId,
+                StringUtils.formatId(pokemon.id),
                 style: TextStyle(
                   fontSize: 12.sp,
                   color: const Color(0xFF666666),

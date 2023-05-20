@@ -5,6 +5,7 @@ class PokedexColors {
 
   static const pokedexRed = Color(0xFFDC0A2D);
   static const defaultTextBlack = Color(0xFF1D1D1D);
+  static const defaultGray = Color(0xFF666666);
 
   static getColorByPokemonType(String type) =>
       pokemonTypeColor[type] ?? pokedexRed;

@@ -17,7 +17,7 @@ class PokemonDetailsBackground extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 8.h, bottom: 4.h, right: 9.w),
               child: Opacity(
-                opacity: 0.2,
+                opacity: 0.16,
                 child: Image.asset(
                   'assets/images/pokeball.png',
                   fit: BoxFit.contain,

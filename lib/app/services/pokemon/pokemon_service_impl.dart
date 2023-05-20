@@ -45,9 +45,6 @@ class PokemonServiceImpl implements PokemonService {
     final types = response.types.map((e) => e.type.name).toList();
     final stats = {for (final e in response.stats) e.stat.name: e.baseStat};
 
-    // print(stats);
-    print(response.stats[0].baseStat);
-
     return PokemonModel(
       id: id,
       name: response.name,

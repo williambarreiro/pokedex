@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/app/core/ui/extensions/theme_extension.dart';
 import 'package:pokedex/app/core/ui/pokedex_colors.dart';
 import 'package:pokedex/app/modules/pokemon/details/controller/pokemon_details_controller.dart';
 import 'package:pokedex/app/modules/pokemon/details/widgets/pokemon_details_background.dart';
@@ -31,14 +32,32 @@ class PokemonDetailsPage extends StatelessWidget {
               children: [
                 PokemonDetailsBackground(
                   color: PokedexColors.getColorByPokemonType(
-                      state.pokemon!.types.first),
+                    state.pokemon!.types.first,
+                  ),
                 ),
-                PokemonDetailsForeground(pokemon: state.pokemon!),
+                PokemonDetailsForeground(
+                  pokemon: state.pokemon!,
+                  onPreviousPressed: () =>
+                      controller.loadPokemon(state.pokemon!.id - 1),
+                  onNextPressed: () =>
+                      controller.loadPokemon(state.pokemon!.id + 1),
+                ),
               ],
             ),
           );
+        } else {
+          return Scaffold(
+            appBar: state.status != PokemonDetailsStatus.loading
+                ? AppBar(backgroundColor: context.primaryColor)
+                : null,
+            body: Center(
+              child: Visibility(
+                visible: state.status == PokemonDetailsStatus.loading,
+                child: const CircularProgressIndicator(),
+              ),
+            ),
+          );
         }
-        return Container();
       },
     );
   }

@@ -4,10 +4,10 @@ import 'package:pokedex/app/core/ui/extensions/screen_size_extension.dart';
 import 'package:pokedex/app/core/ui/pokedex_colors.dart';
 import 'package:pokedex/app/models/pokemon_model.dart';
 
-class PokemonStatsWidget extends StatelessWidget {
+class PokemonAboutWidget extends StatelessWidget {
   final PokemonModel pokemon;
 
-  const PokemonStatsWidget({
+  const PokemonAboutWidget({
     super.key,
     required this.pokemon,
   });

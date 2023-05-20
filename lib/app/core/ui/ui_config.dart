@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/app/core/ui/extensions/screen_size_extension.dart';
 import 'package:pokedex/app/core/ui/pokedex_colors.dart';
-import 'package:pokedex/app/core/ui/screen_size_extension.dart';
 
 class UiConfig {
   UiConfig._();
 
   static ThemeData get theme => ThemeData(
         fontFamily: 'Poppins',
+        primaryColor: PokedexColors.pokedexRed,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(color: PokedexColors.defaultTextBlack),
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:pokedex/app/core/ui/pokedex_colors.dart';
-import 'package:pokedex/app/core/ui/screen_size_extension.dart';
+import 'package:pokedex/app/core/ui/extensions/screen_size_extension.dart';
+import 'package:pokedex/app/core/ui/extensions/theme_extension.dart';
 import 'package:pokedex/app/modules/pokemon/list/controller/pokemon_list_controller.dart';
 
 import 'widgets/pokemon_card.dart';
@@ -43,7 +43,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: PokedexColors.pokedexRed,
+      backgroundColor: context.primaryColor,
       appBar: AppBar(
         title: const Text('Pokédex'),
         leading: Padding(
@@ -53,7 +53,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
             fit: BoxFit.contain,
           ),
         ),
-        backgroundColor: PokedexColors.pokedexRed,
+        backgroundColor: context.primaryColor,
         elevation: 0,
       ),
       body: Container(

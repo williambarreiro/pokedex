@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/app/core/ui/screen_size_extension.dart';
+import 'package:pokedex/app/core/ui/extensions/screen_size_extension.dart';
 
 import '../../../../models/pokemon_basic_model.dart';
 

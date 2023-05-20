@@ -4,6 +4,7 @@ import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/repositories/pokemon/pokemon_repository.dart';
 
 import '../../core/helpers/environments.dart';
+import '../../core/helpers/string_utils.dart';
 import 'pokemon_service.dart';
 
 class PokemonServiceImpl implements PokemonService {
@@ -28,7 +29,7 @@ class PokemonServiceImpl implements PokemonService {
       pokemonBasicList.add(
         PokemonBasicModel(
           id: _getIdFromUrl(pokemon.url),
-          name: pokemon.name,
+          name: StringUtils.capitalizeFirstLetter(pokemon.name),
           sprite: '$spritesUrl/$id.png',
         ),
       );

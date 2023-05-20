@@ -8,7 +8,7 @@ part 'pokemon_list_state.dart';
 
 class PokemonListController extends Cubit<PokemonListState> {
   final PokemonService _pokemonService;
-  final _pokemons = <PokemonBasicModel>[];
+  final pokemons = <PokemonBasicModel>[];
 
   PokemonListController(
     this._pokemonService,
@@ -18,12 +18,12 @@ class PokemonListController extends Cubit<PokemonListState> {
     emit(state.copyWith(status: PokemonListStatus.loading));
     try {
       final newPokemons =
-          await _pokemonService.getPokemons(offset: _pokemons.length);
-      _pokemons.addAll(newPokemons);
+          await _pokemonService.getPokemons(offset: pokemons.length);
+      pokemons.addAll(newPokemons);
       emit(
         state.copyWith(
           status: PokemonListStatus.complete,
-          pokemons: _pokemons,
+          pokemons: pokemons,
         ),
       );
     } catch (e) {

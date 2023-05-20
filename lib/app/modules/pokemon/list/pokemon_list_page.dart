@@ -6,10 +6,38 @@ import 'package:pokedex/app/modules/pokemon/list/controller/pokemon_list_control
 
 import 'widgets/pokemon_card.dart';
 
-class PokemonListPage extends StatelessWidget {
+class PokemonListPage extends StatefulWidget {
   final PokemonListController controller;
 
   const PokemonListPage({super.key, required this.controller});
+
+  @override
+  State<PokemonListPage> createState() => _PokemonListPageState();
+}
+
+class _PokemonListPageState extends State<PokemonListPage> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.atEdge) {
+      if (_scrollController.position.pixels != 0) {
+        widget.controller.loadPokemons();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +61,59 @@ class PokemonListPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
         ),
-        child: BlocBuilder<PokemonListController, PokemonListState>(
-          bloc: controller,
-          builder: (context, state) {
-            if (state.status == PokemonListStatus.complete) {
-              return GridView.count(
-                crossAxisCount: 3,
-                children: List.generate(state.pokemons.length, (index) {
-                  final pokemon = state.pokemons[index];
-                  return PokemonCard(pokemon: pokemon);
-                }),
+        child: BlocConsumer<PokemonListController, PokemonListState>(
+          bloc: widget.controller,
+          listener: (context, state) {
+            if (state.status == PokemonListStatus.failure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Falha ao carregar Pokémons')),
               );
             }
-            return Container();
+          },
+          builder: (context, state) {
+            if (state.status == PokemonListStatus.failure &&
+                widget.controller.pokemons.isEmpty) {
+              return Center(
+                child: ElevatedButton(
+                  onPressed: () => widget.controller.loadPokemons(),
+                  child: const Text('Recarregar'),
+                ),
+              );
+            }
+
+            return Stack(
+              children: [
+                GridView.count(
+                  controller: _scrollController,
+                  crossAxisCount: 3,
+                  children: List.generate(state.pokemons.length, (index) {
+                    final pokemon = state.pokemons[index];
+                    return PokemonCard(pokemon: pokemon);
+                  }),
+                ),
+                Visibility(
+                  visible: state.status == PokemonListStatus.loading,
+                  child: _loadingWidget(),
+                ),
+              ],
+            );
           },
         ),
       ),
     );
+  }
+
+  Widget _loadingWidget() {
+    if (widget.controller.pokemons.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return Positioned(
+        left: MediaQuery.of(context).size.width / 2 - 20.w,
+        bottom: 30.h,
+        child: const CircularProgressIndicator(),
+      );
+    }
   }
 }

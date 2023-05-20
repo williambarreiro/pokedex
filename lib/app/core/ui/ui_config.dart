@@ -16,5 +16,14 @@ class UiConfig {
             fontSize: 24.sp,
           ),
         ),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: PokedexColors.pokedexRed,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all<Color>(PokedexColors.pokedexRed),
+          ),
+        ),
       );
 }

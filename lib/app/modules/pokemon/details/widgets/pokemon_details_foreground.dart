@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/app/core/ui/extensions/screen_size_extension.dart';
 import 'package:pokedex/app/modules/pokemon/details/widgets/custom_app_bar.dart';
 import 'package:pokedex/app/modules/pokemon/details/widgets/pokemon_about_widget.dart';
+import 'package:pokedex/app/modules/pokemon/details/widgets/pokemon_base_stats_widget.dart';
 import 'package:pokedex/app/modules/pokemon/details/widgets/pokemon_types_widget.dart';
 
 import '../../../../models/pokemon_model.dart';
@@ -22,8 +23,10 @@ class PokemonDetailsForeground extends StatelessWidget {
           width: 200.w,
         ),
         PokemonTypesWidget(types: pokemon.types),
-        SizedBox(height: 16.h),
+        SizedBox(height: 20.h),
         PokemonAboutWidget(pokemon: pokemon),
+        SizedBox(height: 20.h),
+        PokemonBaseStatsWidget(pokemon: pokemon),
       ],
     );
   }

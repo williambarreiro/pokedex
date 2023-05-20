@@ -117,7 +117,7 @@ class Stats {
 
   Map<String, dynamic> toMap() {
     return {
-      'baseStat': baseStat,
+      'base_stat': baseStat,
       'effort': effort,
       'stat': stat.toMap(),
     };
@@ -125,7 +125,7 @@ class Stats {
 
   factory Stats.fromMap(Map<String, dynamic> map) {
     return Stats(
-      baseStat: map['baseStat']?.toInt() ?? 0,
+      baseStat: map['base_stat']?.toInt() ?? 0,
       effort: map['effort']?.toInt() ?? 0,
       stat: Ability.fromMap(map['stat']),
     );

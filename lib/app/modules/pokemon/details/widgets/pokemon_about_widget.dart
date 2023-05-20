@@ -32,17 +32,9 @@ class PokemonAboutWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildWeightComponent(),
-                Container(
-                  color: Colors.grey,
-                  height: 48.h,
-                  width: 1,
-                ),
+                _divider(),
                 _buildHeightComponent(),
-                Container(
-                  color: Colors.grey,
-                  height: 48.h,
-                  width: 1,
-                ),
+                _divider(),
                 _buildMovesComponent(),
               ],
             ),
@@ -131,6 +123,14 @@ class PokemonAboutWidget extends StatelessWidget {
         color: PokedexColors.defaultGray,
         fontSize: 8.sp,
       ),
+    );
+  }
+
+  Widget _divider() {
+    return Container(
+      color: PokedexColors.defaultLightGray,
+      height: 48.h,
+      width: 1,
     );
   }
 }

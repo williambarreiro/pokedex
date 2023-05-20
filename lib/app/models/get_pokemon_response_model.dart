@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class GetPokemonResponseModel {
+  final String name;
   final int height;
   final int weight;
   final List<Abilities> abilities;
@@ -8,6 +9,7 @@ class GetPokemonResponseModel {
   final List<Stats> stats;
 
   GetPokemonResponseModel({
+    required this.name,
     required this.height,
     required this.weight,
     required this.abilities,
@@ -17,6 +19,7 @@ class GetPokemonResponseModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'name': name,
       'height': height,
       'weight': weight,
       'abilities': abilities.map((x) => x.toMap()).toList(),
@@ -27,6 +30,7 @@ class GetPokemonResponseModel {
 
   factory GetPokemonResponseModel.fromMap(Map<String, dynamic> map) {
     return GetPokemonResponseModel(
+      name: map['name'] ?? '',
       height: map['height']?.toInt() ?? 0,
       weight: map['weight']?.toInt() ?? 0,
       abilities: List<Abilities>.from(

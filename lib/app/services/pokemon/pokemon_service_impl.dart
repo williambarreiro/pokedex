@@ -39,14 +39,16 @@ class PokemonServiceImpl implements PokemonService {
 
   @override
   Future<PokemonModel> getPokemon(int id) async {
+    final spritesUrl = Environments.param(Constants.envSpritesUrlKey) ?? '';
     final response = await _repository.getPokemon(id);
-
     final abilities = response.abilities.map((e) => e.ability.name).toList();
     final types = response.types.map((e) => e.type.name).toList();
     final stats = {for (final e in response.stats) e.stat.name: e.baseStat};
 
     return PokemonModel(
       id: id,
+      name: response.name,
+      sprite: '$spritesUrl/$id.png',
       height: response.height / 10,
       weight: response.weight / 10,
       abilities: abilities,

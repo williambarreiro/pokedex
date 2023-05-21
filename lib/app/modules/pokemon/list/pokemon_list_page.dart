@@ -51,6 +51,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
           Expanded(
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+              padding: EdgeInsets.symmetric(horizontal: 4.w),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: Colors.white,

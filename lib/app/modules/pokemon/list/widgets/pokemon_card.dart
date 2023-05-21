@@ -37,7 +37,7 @@ class PokemonCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.sp),
       ),
       color: Colors.white,
-      elevation: 2,
+      elevation: 3,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -61,34 +61,32 @@ class PokemonCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 6.h),
+          SizedBox(height: 4.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 StringUtils.formatId(pokemon.id),
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 8.sp,
                   color: const Color(0xFF666666),
                 ),
               ),
               SizedBox(width: 12.w),
             ],
           ),
-          SizedBox(
-            width: 64.w,
-            child: pokemon.sprite.isNotEmpty
-                ? Image.network(
-                    pokemon.sprite,
-                    fit: BoxFit.contain,
-                  )
-                : Container(),
-          ),
+          pokemon.sprite.isNotEmpty
+              ? Image.network(
+                  pokemon.sprite,
+                  height: 72.h,
+                  fit: BoxFit.contain,
+                )
+              : Container(),
           Text(
             pokemon.name,
-            style: TextStyle(fontSize: 12.sp),
+            style: TextStyle(fontSize: 10.sp),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: 6.h),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:mocktail/mocktail.dart';
+import 'package:pokedex/app/models/pokemon_basic_model.dart';
 import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/services/pokemon/pokemon_service.dart';
 
@@ -23,7 +24,10 @@ class PokemonServiceSpy extends Mock implements PokemonService {
         ),
       );
 
-  void mockGetPokemons() => mockGetPokemonsCall().thenAnswer((_) async => []);
+  void mockGetPokemons() => mockGetPokemonsCall().thenAnswer(
+        (_) async => <PokemonBasicModel>[],
+      );
+
   void mockGetPokemonError() => mockGetPokemonCall().thenThrow(Exception());
   void mockGetPokemonsError() => mockGetPokemonsCall().thenThrow(Exception());
 }

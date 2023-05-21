@@ -102,12 +102,22 @@ class PokemonBaseStatsWidget extends StatelessWidget {
         ),
         SizedBox(width: 8.w),
         Container(
-          color: pokemonColor,
+          decoration: BoxDecoration(
+            color: pokemonColor,
+            borderRadius: const BorderRadius.horizontal(
+              left: Radius.circular(20),
+            ),
+          ),
           width: coloredBarSize.w,
           height: 4.h,
         ),
         Container(
-          color: PokedexColors.defaultLightGray,
+          decoration: const BoxDecoration(
+            color: PokedexColors.defaultLightGray,
+            borderRadius: BorderRadius.horizontal(
+              right: Radius.circular(20),
+            ),
+          ),
           width: (barWidth - coloredBarSize).w,
           height: 4.h,
         ),

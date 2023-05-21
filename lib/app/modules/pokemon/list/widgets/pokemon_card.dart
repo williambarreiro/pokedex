@@ -61,7 +61,7 @@ class PokemonCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 4.h),
+          SizedBox(height: 6.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -78,7 +78,7 @@ class PokemonCard extends StatelessWidget {
           pokemon.sprite.isNotEmpty
               ? Image.network(
                   pokemon.sprite,
-                  height: 72.h,
+                  height: 70.h,
                   fit: BoxFit.contain,
                 )
               : Container(),

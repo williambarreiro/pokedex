@@ -5,6 +5,7 @@
 <p align="center">Pokédex app feito com Flutter.</p>
 
 <p align="center">
+ <a href="#-screenshots">Screenshots</a> •
  <a href="#-links">Links</a> •
  <a href="#-tecnologias">Tecnologias</a> •
  <a href="#-rodando-o-app">Rodando o app</a> •
@@ -12,6 +13,13 @@
 </p>
 
 ---
+## 📱 Screenshots
+
+<br>
+<h1 align="center">
+  <img alt="Pokedex" title="Pokedex" src="./github/pokemon_list.png" height="500" />
+  <img alt="Pokedex" title="Pokedex" src="./github/pokemon_details.png" height="500" />
+</h1>
 
 ## 🔗 Links
 - [PokéAPI](https://pokeapi.co/)
@@ -20,7 +28,7 @@
 ---
 
 ## 🚀 Tecnologias
-- `Flutter:` Versão 3.7.12;
+- `Flutter` na versão 3.7.12;
 - `Cubit` para gerenciamento de estados;
 - `Modular` para injeção de dependências e gerenciamento de rotas;
 - `Dio` como Client HTTP;

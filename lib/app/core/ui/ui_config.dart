@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/app/core/ui/extensions/screen_size_extension.dart';
 import 'package:pokedex/app/core/ui/pokedex_colors.dart';
 
 class UiConfig {
@@ -10,12 +9,6 @@ class UiConfig {
         primaryColor: PokedexColors.pokedexRed,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(color: PokedexColors.defaultTextBlack),
-        ),
-        appBarTheme: AppBarTheme(
-          titleTextStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24.sp,
-          ),
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           color: PokedexColors.pokedexRed,

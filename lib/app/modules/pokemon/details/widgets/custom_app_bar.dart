@@ -8,8 +8,7 @@ class CustomAppBar extends StatelessWidget {
   final String title;
   final int id;
 
-  const CustomAppBar({Key? key, required this.title, required this.id})
-      : super(key: key);
+  const CustomAppBar({super.key, required this.title, required this.id});
 
   @override
   Widget build(BuildContext context) {
